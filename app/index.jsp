@@ -10,6 +10,7 @@
 <h1 id="computerName">Chargement du nom de l'ordinateur...</h1>
 
 <script>
+
     // Obtient le nom de l'ordinateur
     var computerName = window.location.hostname;
 
