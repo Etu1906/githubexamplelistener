@@ -1,31 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informations sur l'ordinateur</title>
+    <title>Informations sur le serveur</title>
 </head>
 <body>
 
-<h1 id="computerInfo">Chargement des informations...</h1>
+<h1>Informations sur le serveur</h1>
 
-<script>
-    // Récupérer le nom de l'ordinateur
-    const computerName = window.location.hostname;
+<%
+    // Obtenez des informations sur le serveur
+    String serverInfo = application.getServerInfo();
+    String serverName = request.getServerName();
+    int serverPort = request.getServerPort();
 
-    // Récupérer l'adresse IP locale
-    let localIp = 'Non disponible';
-    const pc = new RTCPeerConnection({iceServers: []});
-    pc.createDataChannel('');
-    pc.createOffer().then(offer => {
-        localIp = offer.sdp.split('\n')[1].split(' ')[4];
-        pc.close();
-        
-        // Afficher les informations
-        document.getElementById("computerInfo").innerText = `Nom de l'ordinateur : ${computerName}\nAdresse IP locale : ${localIp}`;
-    });
-
-</script>
+    // Affichez les informations sur le serveur dans la page
+    out.println("<p>Info du serveur : " + serverInfo + "</p>");
+    out.println("<p>Nom du serveur : " + serverName + "</p>");
+    out.println("<p>Port du serveur : " + serverPort + "</p>");
+%>
 
 </body>
 </html>
